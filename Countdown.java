@@ -64,7 +64,7 @@ public class Countdown {
         }
 
         try {
-            Thread.sleep(111111100);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
