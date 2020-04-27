@@ -1,7 +1,7 @@
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
@@ -45,7 +45,17 @@ public class Countdown {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get("countdown.txt"), StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING);
             writer.write(msg);
             writer.close();
+        } catch (NoSuchFileException e) {
+            String empty = "";
+            try {
+                Files.write(Paths.get("countdown.txt"), empty.getBytes());
+                System.out.println("no countdown.txt found -> therefore created one");
+            } catch (IOException ex) {
+                System.out.println("first catch");
+                ex.printStackTrace();
+            }
         } catch (IOException e) {
+            System.out.println("second catch");
             e.printStackTrace();
         }
 
@@ -54,7 +64,7 @@ public class Countdown {
         }
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(111111100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
